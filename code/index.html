@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+<body>
+  <div class="button-container">
+    <button class="button new-game">New game</button>
+    <button class="button reset-game">Reset game</button>
+  </div>
+
+  <div class="player">
+    <div class="ball ball-home"></div>
+    <input name="home-name" type="text" value="Home">
+    <p>Points: <span class="home-points-output">0</span></p>
+    <p>Sets: <span class="home-sets-output">0</span></p>
+    <button class="home-add-point">+</button>
+    <button class="home-subtract-point">-</button>
+  </div>
+
+  <div class="player visitor">
+    <div class="ball ball-visitor"></div>
+    <input name="visitor-name" type="text" value="Visitor">
+    <p>Points: <span class="visitor-points-output">0</span></p>
+    <p>Sets: <span class="visitor-sets-output">0</span></p>
+    <button class="visitor-add-point">+</button>
+    <button class="visitor-subtract-point">-</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
