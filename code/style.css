@@ -1,7 +1,85 @@
+@font-face {
+  font-family: 'Apple II Pro';
+  src: url(/assets/fonts/Apple\ II\ Pro.otf);
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Press Start 2P';
+  src: url(/assets/fonts/PressStart2P-Regular.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --white:#FFF;
+  --bg-1: #F6F8F4;
+  --bg-2: #E6EDE1;
+  --bg-3: #B8BEB4;
+  --bg-4: #D5E0CC;
+  --bg-5: #2C312B;
+}
+
+/* Support classes */
+.b-bottom {
+  border-bottom: 2px solid var(--bg-5);
+}
+
+.b-top {
+  border-top: 2px solid var(--bg-5);
+}
+
+.b-left {
+  border-left: 2px solid var(--bg-5);
+}
+
+.b-right {
+  border-right: 2px solid var(--bg-5);
+}
+
+.b-all {
+  border: 2px solid var(--bg-5);
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.p-basic {
+  font-family: 'Apple II Pro', monospace;
+  font-size: 16px;
+  letter-spacing: -2px;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.p-score-small {
+  font-family: 'Press Start 2P';
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  padding-left: 3px
+}
+
+.p-score-big {
+  font-family: 'Press Start 2P';
+  font-size: 56px;
+  color: var(--bg-5);
+  text-align: center;
+  text-shadow: 0px 3px 0px rgba(255, 255, 255, 0.80), 0px -4px 0px rgba(0, 0, 0, 0.20);
+  font-style: normal;
+  font-weight: 400;
+  padding-left: 7px;
+}
+
+/* Project classes */
+
 * {
   box-sizing: border-box;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 16px;
+  image-rendering: pixelated;
 }
 
 body {
@@ -10,30 +88,110 @@ body {
   display: flex;
   gap: 80px;
   background-color: #000;
-  color: #CCC;
   margin: 0;
   padding: 40px;
 }
 
 input {
-  background-color: #000;
-  color: #CCC;
+  background-color: transparent;
   border: none;
-  font-weight: 700;
   width: 100%;
+  text-align: center;
+  color: var(--bg-5);
 }
 
-button {
-  width: 40px;
-  height: 40px;
-  background-color: #000;
-  color: #CCC;
-  border: solid 1px #333;
+div.app-container {
+  width: 480px;
+  height: 270px;
+  background-color: var(--bg-2);
+  color: var(--bg-5);
+
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr 1fr 3fr 1fr;
+  grid-template-rows: repeat(5, 1fr);
 }
 
 div.player {
-  width: 100px;
+  width: 100%;
   position: relative;
+}
+
+input.home {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+button.home-add-point {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  width: 100%;
+  height: 100%;
+}
+
+button.home-subtract-point {
+  grid-column: 1;
+  grid-row: 3 / 5;
+  width: 100%;
+  height: 100%;
+}
+
+div.home-points-container {
+  grid-column: 2;
+  grid-row: 2 / 5;
+  box-shadow: 0px 4px 0px 0px rgba(0, 0, 0, 0.20) inset; 
+  padding-top: 4px;
+}
+
+div.home-sets-container {
+  grid-column: 3;
+  grid-row: 2;
+  box-shadow: 0px 4px 0px 0px rgba(0, 0, 0, 0.20) inset;
+  background-color: var(--bg-4);
+}
+
+div.ball-home-container {
+  grid-column: 3;
+  grid-row: 3;
+  background-color: var(--bg-4);
+}
+
+input.visitor {
+  grid-column: 5;
+  grid-row: 1;
+}
+
+button.visitor-add-point {
+  grid-column: 6;
+  grid-row: 1 / 3;
+  width: 100%;
+  height: 100%;
+}
+
+button.visitor-subtract-point {
+  grid-column: 6;
+  grid-row: 3 / 5;
+  width: 100%;
+  height: 100%;
+}
+
+div.visitor-points-container {
+  grid-column: 5;
+  grid-row: 2 / 5;
+  box-shadow: 0px 4px 0px 0px rgba(0, 0, 0, 0.20) inset; 
+  padding-top: 4px;
+}
+
+div.visitor-sets-container {
+  grid-column: 4;
+  grid-row: 2;
+  box-shadow: 0px 4px 0px 0px rgba(0, 0, 0, 0.20) inset;
+  background-color: var(--bg-4);
+}
+
+div.ball-visitor-container {
+  grid-column: 4;
+  grid-row: 3;
+  background-color: var(--bg-4);
 }
 
 div.button-container {
@@ -42,21 +200,52 @@ div.button-container {
   gap: 16px;
 }
 
+button {
+  border: none;
+}
+
 button.button {
-  width: auto;
-  padding: 0 16px;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-1);
+  box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 0.80) inset, -2px -2px 0px 0px rgba(0, 0, 0, 0.20) inset;
+  
+  color: #2C312B;
+}
+
+button.reset-game {
+  grid-column: 3 / 5;
+  grid-row: 4;
+}
+
+button.new-game {
+  height: 40px;
 }
 
 div.ball {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  position: absolute;
-  left: -24px;
-  top: 4px;
-  border: 1px solid #CCC;
+  width: 24px;
+  height: 24px;
 }
 
 div.service {
-  background-color: #CCC;
+  background-image: url(/assets/images/ball.png);
+  background-size: cover;
+}
+
+div.hour-container {
+  grid-column: 3 / 5;
+  grid-row: 1;
+}
+
+div.caster-container {
+  grid-column: 1 / -1;
+  grid-row: 5;
+  background-color: var(--bg-5);
+  color: var(--bg-1);
+}
+
+svg.icon {
+  width: 16px;
+  height: 16px;
+  fill: var(--bg-5);
 }

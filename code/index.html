@@ -9,25 +9,60 @@
 <body>
   <div class="button-container">
     <button class="button new-game">New game</button>
-    <button class="button reset-game">Reset game</button>
   </div>
+  <div class="app-container">
+    <input class="player home p-basic b-bottom b-right" name="home-name" type="text" value="Home">
+    <div class="ball-home-container flex-center b-right">
+      <div class="ball ball-home"></div>
+    </div>
+    <div class="home-points-container flex-center b-right">
+      <span class="home-points-output p-score-big">0</span>
+    </div>
+    <div class="home-sets-container flex-center b-right b-bottom">
+      <span class="home-sets-output p-score-small">0</span>
+    </div>
+    <button class="button home-add-point b-right b-bottom">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+        <path d="M9 1H7v6H1v2h6v6h2V9h6V7H9V1Z"/>
+      </svg>
+    </button>
+    <button class="button home-subtract-point b-right">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+        <path d="M15 7v2H1V7h14Z"/>
+      </svg>
+    </button>
 
-  <div class="player">
-    <div class="ball ball-home"></div>
-    <input name="home-name" type="text" value="Home">
-    <p>Points: <span class="home-points-output">0</span></p>
-    <p>Sets: <span class="home-sets-output">0</span></p>
-    <button class="home-add-point">+</button>
-    <button class="home-subtract-point">-</button>
-  </div>
+    <input class="player visitor p-basic b-bottom b-left" name="visitor-name" type="text" value="Visitor">
+    <div class="ball-visitor-container flex-center">
+      <div class="ball ball-visitor"></div>
+    </div>
+    <div class="visitor-points-container flex-center b-left">
+      <span class="visitor-points-output p-score-big">0</span>
+    </div>
+    <div class="visitor-sets-container flex-center b-bottom">
+      <span class="visitor-sets-output p-score-small">0</span>
+    </div>
+    <button class="button visitor-add-point b-left b-bottom">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+        <path d="M9 1H7v6H1v2h6v6h2V9h6V7H9V1Z"/>
+      </svg>
+    </button>
+    <button class="button visitor-subtract-point b-left">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+        <path d="M15 7v2H1V7h14Z"/>
+      </svg>
+      
+    </button>
 
-  <div class="player visitor">
-    <div class="ball ball-visitor"></div>
-    <input name="visitor-name" type="text" value="Visitor">
-    <p>Points: <span class="visitor-points-output">0</span></p>
-    <p>Sets: <span class="visitor-sets-output">0</span></p>
-    <button class="visitor-add-point">+</button>
-    <button class="visitor-subtract-point">-</button>
+    <div class="hour-container flex-center b-bottom">
+      <span class="hour p-basic">00:00</span>
+    </div>
+
+    <div class="caster-container flex-center">
+      <span class="caster-message p-basic">Ping Pong Masters</span>
+    </div>
+
+    <button class="button reset-game p-basic b-top">Reset</button>
   </div>
 
   <script src="script.js"></script>
