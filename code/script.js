@@ -45,6 +45,10 @@ const newGameButton = document.querySelector("button.new-game")
 // Functions
 // Reset the game
 const resetGame = () => {
+  seconds.innerHTML = "00"
+  minutes.innerHTML = "00"
+  totalSeconds = 0
+
   home.points = 0
   homePointsOutput.innerHTML = home.points
   home.sets = 0
@@ -151,6 +155,7 @@ resetGameButton.addEventListener("click", () => {
 })
 
 newGameButton.addEventListener("click", () => {
+  resetGame()
   firstService()
 })
 
