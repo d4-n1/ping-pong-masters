@@ -9,6 +9,7 @@
 <body>
   <div class="button-container">
     <button class="button new-game">New game</button>
+    <button class="button pause-game">Pause</button>
   </div>
   <div class="app-container">
     <input class="player home p-basic b-bottom b-right" name="home-name" type="text" value="Home">
@@ -54,8 +55,10 @@
       
     </button>
 
-    <div class="hour-container flex-center b-bottom">
-      <span class="hour p-basic">00:00</span>
+    <div class="timer-container flex-center b-bottom">
+      <span class="p-basic minutes">00</span>
+      <span class="p-basic">:</span>
+      <span class="p-basic seconds">00</span>
     </div>
 
     <div class="caster-container flex-center">

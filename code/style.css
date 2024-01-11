@@ -232,9 +232,12 @@ div.service {
   background-size: cover;
 }
 
-div.hour-container {
+div.timer-container {
   grid-column: 3 / 5;
   grid-row: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 div.caster-container {

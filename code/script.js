@@ -169,3 +169,33 @@ visitorAddPoint.addEventListener("click", () => {
 visitorSubtractPoint.addEventListener("click", () => {
   subtractPoint(visitor, visitorPointsOutput, visitorSetsOutput)
 })
+
+// Clock
+let timer = setInterval(addSecond, 1000)
+let totalSeconds = 0
+const pauseButton = document.querySelector("button.pause-game")
+const minutes = document.querySelector("span.minutes")
+const seconds = document.querySelector("span.seconds")
+
+function pad(number) {
+  let string = Math.floor(number).toString();
+  if(string.length < 2) {
+    return "0" + string;
+  } else {
+    return string;
+  }}
+
+function addSecond(){
+  totalSeconds++
+  seconds.innerHTML = pad(totalSeconds % 60)
+  minutes.innerHTML = pad(totalSeconds / 60)
+}
+
+pauseButton.addEventListener("click", () => {
+  if (!timer) {
+    timer = setInterval(addSecond, 1000)
+  } else {
+    clearInterval(timer)
+    timer = null
+  }
+})
