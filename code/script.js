@@ -36,11 +36,14 @@ const visitorName = document.querySelector(`input[name="visitor-name"]`)
 const visitorBall = document.querySelector("div.ball-visitor")
 let visitor = {name:visitorName.value, points: 0, sets: 0}
 
+// Caster
+const casterMessage = document.querySelector("span.caster-message")
+
 // Game variables
 let playedSets = home.sets + visitor.sets
 let matchRules = {setPoints: 11, gameSets: 3, services: 2}
-const resetGameButton = document.querySelector("button.reset-game")
 const newGameButton = document.querySelector("button.new-game")
+const homepage = document.querySelector("div.homepage")
 
 // Functions
 // Reset the game
@@ -74,12 +77,16 @@ const updateScores = () => {
 const firstService = () => {
   let x = Math.floor(Math.random() * 2)
   if (x === 0) {
-    alert(`${home.name} comienza el servicio`)
+    casterMessage.innerHTML = `¡${home.name} comienza el servicio!`
     homeBall.classList.add("service")
   } else {
-    alert(`${visitor.name} comienza el servicio`)
+    casterMessage.innerHTML = `¡${visitor.name} comienza el servicio!`
     visitorBall.classList.add("service")
   }
+
+  setTimeout(() => {
+    casterMessage.innerHTML = "Ping Pong Masters"
+    }, 3000);
 }
 
 // Update the service
@@ -150,13 +157,10 @@ visitorName.addEventListener("input", function() {
   visitor.name = this.value
 })
 
-resetGameButton.addEventListener("click", () => {
-  resetGame()
-})
-
 newGameButton.addEventListener("click", () => {
   resetGame()
   firstService()
+  homepage.classList.add("hidden")
 })
 
 homeAddPoint.addEventListener("click", () => {
@@ -178,7 +182,7 @@ visitorSubtractPoint.addEventListener("click", () => {
 // Clock
 let timer = setInterval(addSecond, 1000)
 let totalSeconds = 0
-const pauseButton = document.querySelector("button.pause-game")
+const pauseGameButton = document.querySelector("button.pause-game")
 const minutes = document.querySelector("span.minutes")
 const seconds = document.querySelector("span.seconds")
 
@@ -196,7 +200,7 @@ function addSecond(){
   minutes.innerHTML = pad(totalSeconds / 60)
 }
 
-pauseButton.addEventListener("click", () => {
+pauseGameButton.addEventListener("click", () => {
   if (!timer) {
     timer = setInterval(addSecond, 1000)
   } else {

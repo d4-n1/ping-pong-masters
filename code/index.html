@@ -7,11 +7,18 @@
   <title>Document</title>
 </head>
 <body>
-  <div class="button-container">
-    <button class="button new-game">New game</button>
-    <button class="button pause-game">Pause</button>
+ <div class="app-container">
+
+  <!-- Home page -->
+  <div class="homepage flex-center">
+    <img class="ppg-logo" src="/assets/images/ppg-logo.png">
+    <p class="p-title">Ping Pong Masters</p>
+    <button class="button p-basic new-game">Play a match</button>
+    <p class="caption">Made with <3 by d4-n1</p>
   </div>
-  <div class="app-container">
+  
+  <!-- Scoreboard -->
+  <div class="scoreboard-container">
     <input class="player home p-basic b-bottom b-right" name="home-name" type="text" value="Home">
     <div class="ball-home-container flex-center b-right">
       <div class="ball ball-home"></div>
@@ -65,9 +72,9 @@
       <span class="caster-message p-basic">Ping Pong Masters</span>
     </div>
 
-    <button class="button reset-game p-basic b-top">Reset</button>
+    <button class="button pause-game p-basic b-top">Pause</button>
   </div>
-
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
