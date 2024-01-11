@@ -225,11 +225,12 @@ button.new-game {
 div.ball {
   width: 24px;
   height: 24px;
+  background-image: url(/assets/images/ball-empty.png);
+  background-size: cover;
 }
 
 div.service {
   background-image: url(/assets/images/ball.png);
-  background-size: cover;
 }
 
 div.timer-container {
