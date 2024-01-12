@@ -18,7 +18,8 @@
   --bg-4: #E6EDE1;
   --bg-3: #B8BEB4;
   --bg-4: #D5E0CC;
-  --bg-5: #2C312B;
+  --bg-5: #2c312b;
+  --overlay: rgba(44, 49, 43, 0.95);
 }
 
 /* Support classes */
@@ -103,9 +104,13 @@
 
 body {
   position: relative;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background-color: #000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 div.app-container {
@@ -294,4 +299,23 @@ svg.icon {
   width: 16px;
   height: 16px;
   fill: var(--bg-5);
+}
+
+/* Pause menu classes */
+div.pause-menu {
+  width: 100%;
+  height: 100%;
+  background: var(--overlay);
+  position: absolute;
+  flex-direction: column;
+}
+
+div.pause-menu p:first-child {
+  color: var(--white);
+  margin-bottom: 32px;
+}
+
+div.pause-menu button {
+  width: 200px;
+  margin-bottom: 16px;
 }

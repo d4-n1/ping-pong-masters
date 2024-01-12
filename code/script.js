@@ -43,7 +43,9 @@ const casterMessage = document.querySelector("span.caster-message")
 let playedSets = home.sets + visitor.sets
 let matchRules = {setPoints: 11, gameSets: 3, services: 2}
 const newGameButton = document.querySelector("button.new-game")
+
 const homepage = document.querySelector("div.homepage")
+const pauseMenu = document.querySelector("div.pause-menu")
 
 // Functions
 // Reset the game
@@ -207,4 +209,24 @@ pauseGameButton.addEventListener("click", () => {
     clearInterval(timer)
     timer = null
   }
+
+  pauseMenu.classList.remove("hidden")
+})
+
+// Pause menu
+const resumeGameButton = document.querySelector("button.resume-game")
+const exitGameButton = document.querySelector("button.exit-game")
+
+resumeGameButton.addEventListener("click", () => {
+  pauseMenu.classList.add("hidden")
+  clearInterval(timer)
+  timer = null
+  
+})
+
+exitGameButton.addEventListener("click", () => {
+  pauseMenu.classList.add("hidden")
+  homepage.classList.remove("hidden")
+  clearInterval(timer)
+  timer = null
 })
