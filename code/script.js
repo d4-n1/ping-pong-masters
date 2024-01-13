@@ -3,12 +3,15 @@ MVP
 
 Edición básica de jugadores:
 ✔️ Poder asignar un nombre a cada jugador
+- Pantalla de form de nombre de jugadores
 
 Marcador de puntos y sets: 
 ✔️ Al mejor de 3 sets de 11 puntos.
 ✔️ Los sets se juegan a 11 puntos.
 ✔️ Si se llega a 10 iguales, se juega a diferencia de dos puntos.
-✔️ Al llegar a 2 sets, se gana la partida
+✔️ Al llegar a 2 sets, se gana la partida.
+- Sistema de Undo para que el botón (-) funcione correctamente.
+- Pantalla de victoria
 
 Marcador de bola de saque:
 ✔️ Botón "Comenzar partida"
@@ -65,6 +68,8 @@ const resetGame = () => {
   visitor.sets = 0
   visitorSetsOutput.innerHTML = visitor.sets
   visitorBall.classList.remove("service")
+
+  setTimer()
 }
 
 // Update scores
@@ -182,7 +187,7 @@ visitorSubtractPoint.addEventListener("click", () => {
 })
 
 // Clock
-let timer = setInterval(addSecond, 1000)
+let timer
 let totalSeconds = 0
 const pauseGameButton = document.querySelector("button.pause-game")
 const minutes = document.querySelector("span.minutes")
@@ -196,20 +201,23 @@ function pad(number) {
     return string;
   }}
 
-function addSecond(){
+function addSecond() {
   totalSeconds++
   seconds.innerHTML = pad(totalSeconds % 60)
   minutes.innerHTML = pad(totalSeconds / 60)
 }
 
-pauseGameButton.addEventListener("click", () => {
-  if (!timer) {
-    timer = setInterval(addSecond, 1000)
-  } else {
-    clearInterval(timer)
-    timer = null
-  }
+function setTimer() {
+  timer = setInterval(addSecond, 1000)
+}
 
+function pauseTimer() {
+  clearInterval(timer)
+  timer = null
+}
+
+pauseGameButton.addEventListener("click", () => {
+  pauseTimer()
   pauseMenu.classList.remove("hidden")
 })
 
@@ -219,9 +227,7 @@ const exitGameButton = document.querySelector("button.exit-game")
 
 resumeGameButton.addEventListener("click", () => {
   pauseMenu.classList.add("hidden")
-  clearInterval(timer)
-  timer = null
-  
+  timer = setInterval(addSecond, 1000)
 })
 
 exitGameButton.addEventListener("click", () => {
