@@ -100,7 +100,6 @@ const firstService = () => {
 // Update the service
 const service = () => {
   currentServices++
-  console.log(currentServices)
 
   // Tie break service
   if (home.points >= matchRules.setPoints - 1 && visitor.points >= matchRules.setPoints - 1) {
