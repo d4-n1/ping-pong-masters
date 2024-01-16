@@ -16,7 +16,7 @@ Marcador de puntos y sets:
 Marcador de bola de saque:
 ✔️ Botón "Comenzar partida"
 ✔️ Cada jugador saca dos veces seguidas.
-✔️ Si llegan a 10 iguales, cada jugador solo saca una vez.
+- Si llegan a 10 iguales, cada jugador solo saca una vez.
 ✔️ Randomizador de jugador inicial
 
 */
@@ -44,7 +44,8 @@ const casterMessage = document.querySelector("span.caster-message")
 
 // Game variables
 let playedSets = home.sets + visitor.sets
-let matchRules = {setPoints: 11, gameSets: 3, services: 2}
+let matchRules = {setPoints: 11, gameSets: 3, services: 2, tieBreakServices: 1}
+let currentServices = 0
 const newGameButton = document.querySelector("button.new-game")
 
 const homepage = document.querySelector("div.homepage")
@@ -98,9 +99,23 @@ const firstService = () => {
 
 // Update the service
 const service = () => {
-  if ((home.points + visitor.points) % matchRules.services == 0) {
+  currentServices++
+  console.log(currentServices)
+
+  // Tie break service
+  if (home.points >= matchRules.setPoints - 1 && visitor.points >= matchRules.setPoints - 1) {
+    if (currentServices >= matchRules.tieBreakServices) {
+      homeBall.classList.toggle("service")
+      visitorBall.classList.toggle("service")
+      currentServices = 0
+    }
+  }
+  
+  // Default service
+  if (currentServices == matchRules.services) {
     homeBall.classList.toggle("service")
     visitorBall.classList.toggle("service")
+    currentServices = 0
   }
 }
 
