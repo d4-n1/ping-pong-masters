@@ -61,6 +61,7 @@
   font-family: 'Apple II Pro', monospace;
   font-size: 16px;
   letter-spacing: -2px;
+  word-spacing: -4px;
   font-weight: 400;
   font-style: normal;
 }
@@ -69,6 +70,7 @@
   font-family: 'Apple II Pro', monospace;
   font-size: 24px;
   letter-spacing: -3px;
+  word-spacing: -6px;
   font-weight: 400;
   font-style: normal;
 }
