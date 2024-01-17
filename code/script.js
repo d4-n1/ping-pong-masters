@@ -16,8 +16,10 @@ Marcador de puntos y sets:
 Marcador de bola de saque:
 ✔️ Botón "Comenzar partida"
 ✔️ Cada jugador saca dos veces seguidas.
-- Si llegan a 10 iguales, cada jugador solo saca una vez.
+✔️ Si llegan a 10 iguales, cada jugador solo saca una vez.
 ✔️ Randomizador de jugador inicial
+- El servicio cambia al otro jugador que no empezó el set
+- Añadir al ganador del randomizador la posibilidad de elegir sacar o campo
 
 */
 
