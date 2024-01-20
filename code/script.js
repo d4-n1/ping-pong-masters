@@ -23,7 +23,7 @@ Marcador de bola de saque:
 
 */
 
-// Player 1 variables
+// Home variables
 const homeAddPoint = document.querySelector("button.home-add-point")
 const homeSubtractPoint = document.querySelector("button.home-subtract-point")
 const homePointsOutput = document.querySelector("span.home-points-output")
@@ -32,7 +32,7 @@ const homeName = document.querySelector(`input[name="home-name"]`)
 const homeBall = document.querySelector("div.ball-home")
 let home = {name: homeName.value, points: 0, sets: 0}
 
-// Player 2 variables
+// Visitor variables
 const visitorAddPoint = document.querySelector("button.visitor-add-point")
 const visitorSubtractPoint = document.querySelector("button.visitor-subtract-point")
 const visitorPointsOutput = document.querySelector("span.visitor-points-output")
@@ -47,7 +47,9 @@ const casterMessage = document.querySelector("span.caster-message")
 // Game variables
 let playedSets = home.sets + visitor.sets
 let matchRules = {setPoints: 11, gameSets: 3, services: 2, tieBreakServices: 1}
-let currentServices = 0
+let currentService = 0
+let servicer = ""
+let firstServicer = ""
 const newGameButton = document.querySelector("button.new-game")
 
 const homepage = document.querySelector("div.homepage")
@@ -83,42 +85,102 @@ const updateScores = () => {
   visitorSetsOutput.innerHTML = visitor.sets
 }
 
+const toggleService = () => {
+  servicer = servicer === "home" ? "visitor" : "home"
+}
+
+const actualService = () => {
+  return firstServicer === "home" ? "visitor" : "home"
+}
+
+const coin = () => {
+  let coinWinner
+  let resultado = Math.floor(Math.random() * 2)
+
+  coinWinner = resultado === 0 ? "home" : "visitor"
+  servicer = coinWinner
+  firstServicer = coinWinner
+
+  console.log(`
+  servicer is ${servicer}
+  firstServicer is ${firstServicer}
+  `)
+
+  updateServiceOutput()
+  
+  return servicer
+}
+
 // Choose who serves first
-const firstService = () => {
-  let x = Math.floor(Math.random() * 2)
-  if (x === 0) {
-    casterMessage.innerHTML = `¡${home.name} comienza el servicio!`
+// const firstService = () => {
+//   let x = Math.floor(Math.random() * 2)
+//   if (x === 0) {
+//     casterMessage.innerHTML = `¡${home.name} comienza el servicio!`
+//     homeBall.classList.add("service")
+//   } else {
+//     casterMessage.innerHTML = `¡${visitor.name} comienza el servicio!`
+//     visitorBall.classList.add("service")
+//   }
+
+//   setTimeout(() => {
+//     casterMessage.innerHTML = "Ping Pong Masters"
+//     }, 3000);
+// }
+
+const updateServiceOutput = () => {
+  if (servicer == "home") {
+    visitorBall.classList.remove("service")
     homeBall.classList.add("service")
-  } else {
-    casterMessage.innerHTML = `¡${visitor.name} comienza el servicio!`
+  } else if (servicer == "visitor") {
+    homeBall.classList.remove("service")
     visitorBall.classList.add("service")
   }
 
-  setTimeout(() => {
-    casterMessage.innerHTML = "Ping Pong Masters"
-    }, 3000);
+  console.log(`
+  servicer is ${servicer}
+  firstServicer is ${firstServicer}
+  `)
+}
+
+const serviceListener = (serviceNumber) => {
+  currentService++
+
+  if(currentService >= serviceNumber) {
+    toggleService()
+    currentService = 0
+  }
+}
+
+const updateService = () => {
+  if (home.points >= matchRules.setPoints - 1 && visitor.points >= matchRules.setPoints - 1) {
+    serviceListener(1)
+    updateServiceOutput()
+  } else {
+    serviceListener(2)
+    updateServiceOutput()
+  }
 }
 
 // Update the service
-const service = () => {
-  currentServices++
+// const service = () => {
+//   currentService++
 
-  // Tie break service
-  if (home.points >= matchRules.setPoints - 1 && visitor.points >= matchRules.setPoints - 1) {
-    if (currentServices >= matchRules.tieBreakServices) {
-      homeBall.classList.toggle("service")
-      visitorBall.classList.toggle("service")
-      currentServices = 0
-    }
-  }
+//   // Tie break service
+//   if (home.points >= matchRules.setPoints - 1 && visitor.points >= matchRules.setPoints - 1) {
+//     if (currentService >= matchRules.tieBreakServices) {
+//       homeBall.classList.toggle("service")
+//       visitorBall.classList.toggle("service")
+//       currentService = 0
+//     }
+//   }
   
-  // Default service
-  if (currentServices == matchRules.services) {
-    homeBall.classList.toggle("service")
-    visitorBall.classList.toggle("service")
-    currentServices = 0
-  }
-}
+//   // Default service
+//   if (currentService == matchRules.services) {
+//     homeBall.classList.toggle("service")
+//     visitorBall.classList.toggle("service")
+//     currentService = 0
+//   }
+// }
 
 // Add a point
 const addPoint = (player, pointsOutput, setsOutput) => {
@@ -135,11 +197,16 @@ const addPoint = (player, pointsOutput, setsOutput) => {
       home.points = 0
       visitor.points = 0
       player.sets++
+
+      servicer = actualServicer()
+      toggleService()
+      updateServiceOutput()
     }
   }
   
   updateScores()
-  service()
+  // service()
+  updateService()
   win()
   return player
 }
@@ -159,7 +226,8 @@ const subtractPoint = (player, playerOutput, setsOutput) => {
   }
 
   updateScores()
-  service()
+  // service()
+  updateService()
   return player
 }
 
@@ -182,7 +250,7 @@ visitorName.addEventListener("input", function() {
 
 newGameButton.addEventListener("click", () => {
   resetGame()
-  firstService()
+  coin()
   homepage.classList.add("hidden")
 })
 
