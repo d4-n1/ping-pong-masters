@@ -23,7 +23,9 @@ Marcador de bola de saque:
 
 */
 
+//////////////////////////////////
 // Home variables
+//////////////////////////////////
 const homeAddPoint = document.querySelector("button.home-add-point")
 const homeSubtractPoint = document.querySelector("button.home-subtract-point")
 const homePointsOutput = document.querySelector("span.home-points-output")
@@ -32,7 +34,9 @@ const homeName = document.querySelector(`input[name="home-name"]`)
 const homeBall = document.querySelector("div.ball-home")
 let home = {name: homeName.value, points: 0, sets: 0}
 
+//////////////////////////////////
 // Visitor variables
+//////////////////////////////////
 const visitorAddPoint = document.querySelector("button.visitor-add-point")
 const visitorSubtractPoint = document.querySelector("button.visitor-subtract-point")
 const visitorPointsOutput = document.querySelector("span.visitor-points-output")
@@ -41,10 +45,14 @@ const visitorName = document.querySelector(`input[name="visitor-name"]`)
 const visitorBall = document.querySelector("div.ball-visitor")
 let visitor = {name:visitorName.value, points: 0, sets: 0}
 
+//////////////////////////////////
 // Caster
+//////////////////////////////////
 const casterMessage = document.querySelector("span.caster-message")
 
+//////////////////////////////////
 // Game variables
+//////////////////////////////////
 let playedSets = home.sets + visitor.sets
 let matchRules = {setPoints: 11, gameSets: 3, services: 2, tieBreakServices: 1}
 let currentService = 0
@@ -56,7 +64,9 @@ const homepage = document.querySelector("div.homepage")
 const pauseMenu = document.querySelector("div.pause-menu")
 
 // Functions
+//////////////////////////////////
 // Reset the game
+//////////////////////////////////
 const resetGame = () => {
   seconds.innerHTML = "00"
   minutes.innerHTML = "00"
@@ -77,7 +87,9 @@ const resetGame = () => {
   setTimer()
 }
 
+//////////////////////////////////
 // Update scores
+//////////////////////////////////
 const updateScores = () => {
   homePointsOutput.innerHTML = home.points
   homeSetsOutput.innerHTML = home.sets
@@ -85,12 +97,8 @@ const updateScores = () => {
   visitorSetsOutput.innerHTML = visitor.sets
 }
 
-const toggleService = () => {
-  servicer = servicer === "home" ? "visitor" : "home"
-}
-
-const actualService = () => {
-  return firstServicer === "home" ? "visitor" : "home"
+const toggleServicer = (player) => {
+  return player === "home" ? "visitor" : "home"
 }
 
 const coin = () => {
@@ -101,31 +109,10 @@ const coin = () => {
   servicer = coinWinner
   firstServicer = coinWinner
 
-  console.log(`
-  servicer is ${servicer}
-  firstServicer is ${firstServicer}
-  `)
-
   updateServiceOutput()
   
   return servicer
 }
-
-// Choose who serves first
-// const firstService = () => {
-//   let x = Math.floor(Math.random() * 2)
-//   if (x === 0) {
-//     casterMessage.innerHTML = `¡${home.name} comienza el servicio!`
-//     homeBall.classList.add("service")
-//   } else {
-//     casterMessage.innerHTML = `¡${visitor.name} comienza el servicio!`
-//     visitorBall.classList.add("service")
-//   }
-
-//   setTimeout(() => {
-//     casterMessage.innerHTML = "Ping Pong Masters"
-//     }, 3000);
-// }
 
 const updateServiceOutput = () => {
   if (servicer == "home") {
@@ -135,22 +122,23 @@ const updateServiceOutput = () => {
     homeBall.classList.remove("service")
     visitorBall.classList.add("service")
   }
-
-  console.log(`
-  servicer is ${servicer}
-  firstServicer is ${firstServicer}
-  `)
 }
 
+//////////////////////////////////
+// Count services
+//////////////////////////////////
 const serviceListener = (serviceNumber) => {
   currentService++
 
   if(currentService >= serviceNumber) {
-    toggleService()
+    servicer = toggleServicer(servicer)
     currentService = 0
   }
 }
 
+//////////////////////////////////
+// Change service depending on tiebreak
+//////////////////////////////////
 const updateService = () => {
   if (home.points >= matchRules.setPoints - 1 && visitor.points >= matchRules.setPoints - 1) {
     serviceListener(1)
@@ -161,57 +149,44 @@ const updateService = () => {
   }
 }
 
-// Update the service
-// const service = () => {
-//   currentService++
-
-//   // Tie break service
-//   if (home.points >= matchRules.setPoints - 1 && visitor.points >= matchRules.setPoints - 1) {
-//     if (currentService >= matchRules.tieBreakServices) {
-//       homeBall.classList.toggle("service")
-//       visitorBall.classList.toggle("service")
-//       currentService = 0
-//     }
-//   }
-  
-//   // Default service
-//   if (currentService == matchRules.services) {
-//     homeBall.classList.toggle("service")
-//     visitorBall.classList.toggle("service")
-//     currentService = 0
-//   }
-// }
-
+//////////////////////////////////
 // Add a point
+//////////////////////////////////
 const addPoint = (player, pointsOutput, setsOutput) => {
+  player.points++
+
   if (home.points >= matchRules.setPoints - 1 && visitor.points >= matchRules.setPoints - 1) {
-    player.points++
     if (Math.abs(home.points - visitor.points) == 2) {
       home.points = 0
       visitor.points = 0
       player.sets++
+      firstServicer = toggleServicer(firstServicer)
+      servicer = firstServicer
+      updateServiceOutput()
+      currentService = 0
     } 
   } else {
-    player.points++
     if (player.points >= matchRules.setPoints) {
       home.points = 0
       visitor.points = 0
       player.sets++
 
-      servicer = actualServicer()
-      toggleService()
+      firstServicer = toggleServicer(firstServicer)
+      servicer = firstServicer
       updateServiceOutput()
+      currentService = 0
     }
   }
   
   updateScores()
-  // service()
   updateService()
   win()
   return player
 }
 
+//////////////////////////////////
 // Subtract a point
+//////////////////////////////////
 const subtractPoint = (player, playerOutput, setsOutput) => {
   if (player.points > 0) {
     player.points--
@@ -226,12 +201,13 @@ const subtractPoint = (player, playerOutput, setsOutput) => {
   }
 
   updateScores()
-  // service()
   updateService()
   return player
 }
 
+//////////////////////////////////
 // Checks if something win the game
+//////////////////////////////////
 const win = () => {
   if (home.sets >= Math.ceil(matchRules.gameSets / 2) || visitor.sets >= Math.ceil(matchRules.gameSets / 2) || playedSets >= matchRules.gameSets) {
     const winner = home.sets >= 2 ? home.name : visitor.name;
@@ -270,7 +246,9 @@ visitorSubtractPoint.addEventListener("click", () => {
   subtractPoint(visitor, visitorPointsOutput, visitorSetsOutput)
 })
 
+//////////////////////////////////
 // Clock
+//////////////////////////////////
 let timer
 let totalSeconds = 0
 const pauseGameButton = document.querySelector("button.pause-game")
@@ -305,7 +283,9 @@ pauseGameButton.addEventListener("click", () => {
   pauseMenu.classList.remove("hidden")
 })
 
+//////////////////////////////////
 // Pause menu
+//////////////////////////////////
 const resumeGameButton = document.querySelector("button.resume-game")
 const exitGameButton = document.querySelector("button.exit-game")
 
