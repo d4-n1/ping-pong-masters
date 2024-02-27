@@ -1,28 +1,3 @@
-/*
-MVP
-
-Edición básica de jugadores:
-✔️ Poder asignar un nombre a cada jugador
-- Pantalla de form de nombre de jugadores
-
-Marcador de puntos y sets: 
-✔️ Al mejor de 3 sets de 11 puntos.
-✔️ Los sets se juegan a 11 puntos.
-✔️ Si se llega a 10 iguales, se juega a diferencia de dos puntos.
-✔️ Al llegar a 2 sets, se gana la partida.
-- Sistema de Undo para que el botón (-) funcione correctamente.
-- Pantalla de victoria
-
-Marcador de bola de saque:
-✔️ Botón "Comenzar partida"
-✔️ Cada jugador saca dos veces seguidas.
-✔️ Si llegan a 10 iguales, cada jugador solo saca una vez.
-✔️ Randomizador de jugador inicial
-- El servicio cambia al otro jugador que no empezó el set
-- Añadir al ganador del randomizador la posibilidad de elegir sacar o campo
-
-*/
-
 //////////////////////////////////
 // Home variables
 //////////////////////////////////
