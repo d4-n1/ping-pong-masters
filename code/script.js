@@ -247,7 +247,7 @@ visitorSubtractPoint.addEventListener("click", () => {
 })
 
 //////////////////////////////////
-// Clock
+// Timer
 //////////////////////////////////
 let timer
 let totalSeconds = 0
