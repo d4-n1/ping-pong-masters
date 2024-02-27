@@ -321,3 +321,22 @@ div.pause-menu button {
   width: 200px;
   margin-bottom: 16px;
 }
+
+/* Winner screen classes */
+div.win-screen {
+  width: 100%;
+  height: 100%;
+  background: var(--bg-5);
+  position: absolute;
+  flex-direction: column;
+}
+
+div.win-screen p:first-child {
+  color: var(--white);
+  margin-bottom: 32px;
+}
+
+div.win-screen button {
+  width: 256px;
+  margin-bottom: 16px;
+}

@@ -33,10 +33,19 @@ let matchRules = {setPoints: 11, gameSets: 3, services: 2, tieBreakServices: 1}
 let currentService = 0
 let servicer = ""
 let firstServicer = ""
-const newGameButton = document.querySelector("button.new-game")
 
 const homepage = document.querySelector("div.homepage")
 const pauseMenu = document.querySelector("div.pause-menu")
+const winScreen = document.querySelector("div.win-screen")
+const winnerName = document.querySelector("p.winner")
+
+// Buttons
+const newGameButton = document.querySelector("button.new-game")
+const resumeGameButton = document.querySelector("button.resume-game")
+const exitGameButton = document.querySelector("button.exit-game")
+const retryGameButton = document.querySelector("button.retry-game")
+const exitMatchButton = document.querySelector("button.exit-match")
+
 
 // Functions
 //////////////////////////////////
@@ -59,6 +68,8 @@ const resetGame = () => {
   visitorSetsOutput.innerHTML = visitor.sets
   visitorBall.classList.remove("service")
 
+  clearInterval(timer)
+  timer = null
   setTimer()
 }
 
@@ -186,7 +197,10 @@ const subtractPoint = (player, playerOutput, setsOutput) => {
 const win = () => {
   if (home.sets >= Math.ceil(matchRules.gameSets / 2) || visitor.sets >= Math.ceil(matchRules.gameSets / 2) || playedSets >= matchRules.gameSets) {
     const winner = home.sets >= 2 ? home.name : visitor.name;
-    alert(`${winner} wins the game!`);
+    
+    winnerName.innerHTML = `${winner} wins the game!`
+    winScreen.classList.remove("hidden")
+    
     resetGame();
   }
 }
@@ -261,8 +275,6 @@ pauseGameButton.addEventListener("click", () => {
 //////////////////////////////////
 // Pause menu
 //////////////////////////////////
-const resumeGameButton = document.querySelector("button.resume-game")
-const exitGameButton = document.querySelector("button.exit-game")
 
 resumeGameButton.addEventListener("click", () => {
   pauseMenu.classList.add("hidden")
@@ -272,6 +284,21 @@ resumeGameButton.addEventListener("click", () => {
 exitGameButton.addEventListener("click", () => {
   pauseMenu.classList.add("hidden")
   homepage.classList.remove("hidden")
-  clearInterval(timer)
-  timer = null
+  winScreen.classList.add("hidden")
+})
+
+//////////////////////////////////
+// Win screen
+//////////////////////////////////
+
+retryGameButton.addEventListener("click", () => {
+  coin()
+  homepage.classList.add("hidden")
+  winScreen.classList.add("hidden")
+})
+
+exitMatchButton.addEventListener("click", () => {
+  pauseMenu.classList.add("hidden")
+  homepage.classList.remove("hidden")
+  winScreen.classList.add("hidden")
 })
