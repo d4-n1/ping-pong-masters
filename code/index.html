@@ -4,13 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="/assets/images/ppg-logo.png" type="image/x-icon">
   <title>Document</title>
 </head>
 <body>
-  <div class="button-container">
-    <button class="button new-game">New game</button>
+ <div class="app-container">
+
+  <!-- Home page -->
+  <div class="homepage flex-center">
+    <img class="ppg-logo" src="/assets/images/ppg-logo.png">
+    <p class="p-title">Ping Pong Masters</p>
+    <button class="button p-basic new-game">Play a match</button>
+    <p class="caption">Made with <3 by d4-n1</p>
   </div>
-  <div class="app-container">
+
+  <!-- Pause menu -->
+  <div class="pause-menu flex-center hidden">
+    <p class="p-title">Pause</p>
+    <button class="button p-basic resume-game">Resume game</button>
+    <button class="button p-basic exit-game">Exit game</button>
+  </div>
+
+  <!-- Win screen -->
+  <div class="win-screen flex-center hidden">
+    <p class="p-title winner"></p>
+    <button class="button p-basic retry-game">Play another match</button>
+    <button class="button p-basic exit-match">Exit game</button>
+  </div>
+  
+  <!-- Scoreboard -->
+  <div class="scoreboard-container">
     <input class="player home p-basic b-bottom b-right" name="home-name" type="text" value="Home">
     <div class="ball-home-container flex-center b-right">
       <div class="ball ball-home"></div>
@@ -54,17 +77,19 @@
       
     </button>
 
-    <div class="hour-container flex-center b-bottom">
-      <span class="hour p-basic">00:00</span>
+    <div class="timer-container flex-center b-bottom">
+      <span class="p-basic minutes">00</span>
+      <span class="p-basic">:</span>
+      <span class="p-basic seconds">00</span>
     </div>
 
     <div class="caster-container flex-center">
       <span class="caster-message p-basic">Ping Pong Masters</span>
     </div>
 
-    <button class="button reset-game p-basic b-top">Reset</button>
+    <button class="button pause-game p-basic b-top">Pause</button>
   </div>
-
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
