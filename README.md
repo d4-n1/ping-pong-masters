@@ -1,2 +1,2 @@
 # ping-pong-masters
-v0.1
+v0.1.0
